@@ -1,10 +1,12 @@
 import { Router } from 'express'
-import RemessaLiquidacaoController from './controllers/remessaLiquidacao'
+import container from './config/DependencyInjection/dependencyInjectionResolver'
+import TYPES from './config/DependencyInjection/dependecyInjectionConfig'
+import RemessaLiquidacaoController from './controllers/remessaLiquidacaoController'
+import IRemessaLiquidacaoService from './services/interfaces/iRemessaLiquidacao'
 
-// importar controller
-
+const liquidacaoService = container.get<IRemessaLiquidacaoService>(TYPES.IRemessaLiquidacaoService)
 const routes = Router()
 
-routes.post('/remessa/processar', RemessaLiquidacaoController.ProcessarRemessa)
+routes.post('/remessa/processar', new RemessaLiquidacaoController(liquidacaoService).ProcessarRemessa)
 
 export default routes

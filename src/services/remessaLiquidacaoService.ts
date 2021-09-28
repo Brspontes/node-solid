@@ -8,4 +8,8 @@ export default class RemessaLiquidacaoService implements IRemessaLiquidacaoServi
   EnviarParaProcessamento(remessaLiquidacao: remessaLiquidacao): string {
     return "Remessa enviada Com Sucesso"
   }
+
+  CancelarRemessa(idRemessa: string): string {
+    return "Remessa Cancelada Com Sucesso"
+  }
 }
