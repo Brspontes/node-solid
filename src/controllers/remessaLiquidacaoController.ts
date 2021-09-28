@@ -1,5 +1,5 @@
 import { CustomRequest } from '../helpers/customRequestHelper'
-import { Response } from 'express'
+import { Request, Response } from 'express'
 import RemessaLiquidacaoInput from '../models/inputs/remessaLiquidacaoInput'
 import RemessaLiquidacao from '../models/entities/remessaLiquidacao'
 import IRemessaLiquidacaoService from '../services/interfaces/iRemessaLiquidacao'
@@ -9,8 +9,7 @@ class RemessaLiquidacaoController {
 
   constructor (private readonly liquidacaoService: IRemessaLiquidacaoService) { }
 
-  ProcessarRemessa = async (req: CustomRequest<RemessaLiquidacaoInput>, res: Response) => {
-
+  ProcessarRemessa = (req: CustomRequest<RemessaLiquidacaoInput>, res: Response) => {
     const remessaInput = req.body
     const remessaLiquidacao = new RemessaLiquidacao()
     
@@ -26,6 +25,13 @@ class RemessaLiquidacaoController {
 
     const retorno = this.liquidacaoService.EnviarParaProcessamento(remessaLiquidacao)
     res.status(statusCodeHelper.OK).json(retorno)
+  }
+
+  CancelarRemessa = (req: Request, res: Response) => {
+    const { id } = req.params
+    const retorno = this.liquidacaoService.CancelarRemessa(id)
+
+    res.status(statusCodeHelper.OK).send(retorno)
   }
 }
 

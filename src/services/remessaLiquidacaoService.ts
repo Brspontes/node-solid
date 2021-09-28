@@ -6,10 +6,10 @@ import IRemessaLiquidacaoService from "./interfaces/IRemessaLiquidacao";
 @injectable()
 export default class RemessaLiquidacaoService implements IRemessaLiquidacaoService {
   EnviarParaProcessamento(remessaLiquidacao: remessaLiquidacao): string {
-    return "Remessa enviada Com Sucesso"
+    return 'Remessa enviada Com Sucesso'
   }
 
   CancelarRemessa(idRemessa: string): string {
-    return "Remessa Cancelada Com Sucesso"
+    return `Remessa ${idRemessa} Cancelada Com Sucesso`
   }
 }

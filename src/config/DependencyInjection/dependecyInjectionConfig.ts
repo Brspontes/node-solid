@@ -1,6 +1,7 @@
 
 let TYPES = {
-  IRemessaLiquidacaoService: Symbol("IRemessaLiquidacaoService")
+  IRemessaLiquidacaoService: Symbol('IRemessaLiquidacaoService'),
+  IRelatorio: Symbol('IRelatorio')
 }
 
 export default TYPES 
