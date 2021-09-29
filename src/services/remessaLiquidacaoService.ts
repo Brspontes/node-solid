@@ -1,15 +1,16 @@
-import "reflect-metadata";
-import { injectable } from "inversify";
-import remessaLiquidacao from "../models/entities/remessaLiquidacao";
-import IRemessaLiquidacaoService from "./interfaces/IRemessaLiquidacao";
+import 'reflect-metadata'
+import { injectable } from 'inversify'
+import remessaLiquidacao from '../models/entities/remessaLiquidacao'
+import IRemessaLiquidacaoService from './interfaces/IRemessaLiquidacao'
 
 @injectable()
 export default class RemessaLiquidacaoService implements IRemessaLiquidacaoService {
-  EnviarParaProcessamento(remessaLiquidacao: remessaLiquidacao): string {
+  EnviarParaProcessamento (remessaLiquidacao: remessaLiquidacao): string {
+    console.log(remessaLiquidacao)
     return 'Remessa enviada Com Sucesso'
   }
 
-  CancelarRemessa(idRemessa: string): string {
+  CancelarRemessa (idRemessa: string): string {
     return `Remessa ${idRemessa} Cancelada Com Sucesso`
   }
 }
