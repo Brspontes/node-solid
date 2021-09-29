@@ -6,13 +6,12 @@ import IRemessaLiquidacaoService from '../services/interfaces/iRemessaLiquidacao
 import { statusCodeHelper } from '../helpers/statusCodeHelper'
 
 class RemessaLiquidacaoController {
-
   constructor (private readonly liquidacaoService: IRemessaLiquidacaoService) { }
 
-  ProcessarRemessa = (req: CustomRequest<RemessaLiquidacaoInput>, res: Response) => {
+  ProcessarRemessa = (req: CustomRequest<RemessaLiquidacaoInput>, res: Response): Response => {
     const remessaInput = req.body
     const remessaLiquidacao = new RemessaLiquidacao()
-    
+
     remessaLiquidacao.CriarRemessa(
       remessaInput.numeroControleParticipante,
       remessaInput.cnpj,
@@ -20,18 +19,17 @@ class RemessaLiquidacaoController {
       remessaInput.valorLiquidacao
     )
 
-    if (remessaLiquidacao.errors.length > 0)
-      res.status(statusCodeHelper.BAD_REQUEST).json(remessaLiquidacao.errors)
+    if (remessaLiquidacao.errors.length > 0) { res.status(statusCodeHelper.BAD_REQUEST).json(remessaLiquidacao.errors) }
 
     const retorno = this.liquidacaoService.EnviarParaProcessamento(remessaLiquidacao)
-    res.status(statusCodeHelper.OK).json(retorno)
+    return res.status(statusCodeHelper.OK).json(retorno)
   }
 
-  CancelarRemessa = (req: Request, res: Response) => {
+  CancelarRemessa = (req: Request, res: Response): Response => {
     const { id } = req.params
     const retorno = this.liquidacaoService.CancelarRemessa(id)
 
-    res.status(statusCodeHelper.OK).send(retorno)
+    return res.status(statusCodeHelper.OK).send(retorno)
   }
 }
 
