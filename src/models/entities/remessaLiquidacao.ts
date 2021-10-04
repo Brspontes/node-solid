@@ -5,6 +5,19 @@ export default class RemessaLiquidacao {
   private _valorLiquidacao: number
   private _errors: string[] = []
 
+  constructor (
+    numeroControleParticipante: string,
+    cnpj: string,
+    valorNominal: number,
+    valorLiquidacao: number) {
+    this._cnpj = cnpj
+    this._numeroControleParticipante = numeroControleParticipante
+    this._valorNominal = valorNominal
+    this._valorLiquidacao = valorLiquidacao
+
+    this.ValidaRemessa()
+  }
+
   public get cnpj (): string {
     return this._cnpj
   }
@@ -25,17 +38,13 @@ export default class RemessaLiquidacao {
     return this._errors
   }
 
-  public CriarRemessa (
-    numeroControleParticipante: string,
-    cnpj: string,
-    valorNominal: number,
-    valorLiquidacao: number): void {
-    if (!cnpj) { this._errors.push('CNPJ é obrigatório') } else { this._cnpj = cnpj }
+  public ValidaRemessa (): void {
+    if (!this._cnpj) { this._errors.push('CNPJ é obrigatório') }
 
-    if (!numeroControleParticipante) { this._errors.push('Numero controle participante é obrigatório') } else { this._numeroControleParticipante = numeroControleParticipante }
+    if (!this._numeroControleParticipante) { this._errors.push('Numero controle participante é obrigatório') }
 
-    if (!valorNominal) { this._errors.push('Valor nominal é obrigatório') } else { this._valorNominal = valorNominal }
+    if (!this._valorNominal) { this._errors.push('Valor nominal é obrigatório') }
 
-    if (!valorLiquidacao) { this._errors.push('Valor liquidação é obrigatório') } else { this._valorLiquidacao = valorLiquidacao }
+    if (!this._valorLiquidacao) { this._errors.push('Valor liquidação é obrigatório') }
   }
 }
