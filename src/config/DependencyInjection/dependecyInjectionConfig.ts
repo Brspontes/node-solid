@@ -1,7 +1,10 @@
-
-let TYPES = {
-  IRemessaLiquidacaoService: Symbol('IRemessaLiquidacaoService'),
-  IRelatorio: Symbol('IRelatorio')
+const IRemessaLiquidacaoServiceTypes = Symbol('IRemessaLiquidacaoService')
+const IRelatorioTypes = Symbol('IRelatorio')
+const IRemessaRepositoryTypes = Symbol('IRemessaRepository')
+const FaunaDbTypes = Symbol('FaunaDb')
+export {
+  IRemessaLiquidacaoServiceTypes,
+  IRelatorioTypes,
+  IRemessaRepositoryTypes,
+  FaunaDbTypes
 }
-
-export default TYPES 

@@ -6,7 +6,7 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "name": "nodemon",
-      "program": "${workspaceFolder}/src/server.ts",
+      "program": "${workspaceFolder}/src/app.ts",
       "request": "launch",
       "restart": true,
       "runtimeExecutable": "nodemon",
@@ -35,7 +35,7 @@
       "name": "Launch Program",
       "preLaunchTask": "tsc: build - tsconfig.json",
       "console": "integratedTerminal",
-      "program": "${workspaceFolder}/src/server.ts",
+      "program": "${workspaceFolder}/src/app.ts",
       "outFiles": ["${workspaceFolder}/dist/**/*.js"],
       "args": ["-p", "./src"],
     }

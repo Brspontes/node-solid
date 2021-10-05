@@ -1,24 +1,14 @@
+import 'reflect-metadata'
 import express from 'express'
 import cors from 'cors'
 import routes from './routes'
+import * as dotenv from 'dotenv'
 
-class App {
-  public express: express.Application
+dotenv.config()
+const app: express.Application = express()
 
-  public constructor () {
-    this.express = express()
-    this.middlewares()
-    this.routes()
-  }
+app.use(express.json())
+app.use(cors())
+app.use(routes)
 
-  private middlewares (): void {
-    this.express.use(express.json())
-    this.express.use(cors())
-  }
-
-  private routes (): void {
-    this.express.use(routes)
-  }
-}
-
-export default new App().express
+app.listen(3333, () => console.log('Server started'))

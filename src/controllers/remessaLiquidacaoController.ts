@@ -8,7 +8,7 @@ import { statusCodeHelper } from '../helpers/statusCodeHelper'
 class RemessaLiquidacaoController {
   constructor (private readonly liquidacaoService: IRemessaLiquidacaoService) { }
 
-  ProcessarRemessa = (req: CustomRequest<RemessaLiquidacaoInput>, res: Response): Response => {
+  ProcessarRemessa = async (req: CustomRequest<RemessaLiquidacaoInput>, res: Response): Promise<Response> => {
     const remessaInput = req.body
     const remessaLiquidacao = new RemessaLiquidacao(
       remessaInput.numeroControleParticipante,
@@ -18,7 +18,7 @@ class RemessaLiquidacaoController {
 
     if (remessaLiquidacao.errors.length > 0) { res.status(statusCodeHelper.BAD_REQUEST).json(remessaLiquidacao.errors) }
 
-    const retorno = this.liquidacaoService.EnviarParaProcessamento(remessaLiquidacao)
+    const retorno = await this.liquidacaoService.EnviarParaProcessamento(remessaLiquidacao)
     return res.status(statusCodeHelper.OK).json(retorno)
   }
 

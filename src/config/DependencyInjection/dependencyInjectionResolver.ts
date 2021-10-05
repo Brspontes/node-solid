@@ -1,13 +1,18 @@
-import { Container } from "inversify";
-import TYPES from "./dependecyInjectionConfig";
+import { Container } from 'inversify'
+import { IRelatorioTypes, IRemessaLiquidacaoServiceTypes, IRemessaRepositoryTypes, FaunaDbTypes } from './dependecyInjectionConfig'
 import IRemessaLiquidacaoService from '../../services/interfaces/iRemessaLiquidacao'
-import RemessaLiquidacaoService from "../../services/remessaLiquidacaoService";
-import IRelatorio from "../../services/interfaces/iRelatorio";
-import RelatorioService from "../../services/relatorioService";
+import RemessaLiquidacaoService from '../../services/remessaLiquidacaoService'
+import IRelatorio from '../../services/interfaces/iRelatorio'
+import RelatorioService from '../../services/relatorioService'
+import IRemessaRepository from '../../repository/interfaces/IRemessaRepository'
+import RemessaRepository from '../../repository/RemessaRepository'
+import FaunaDb from '../db/fauna'
 
-var container = new Container()
+const container = new Container()
 
-container.bind<IRemessaLiquidacaoService>(TYPES.IRemessaLiquidacaoService).to(RemessaLiquidacaoService)
-container.bind<IRelatorio>(TYPES.IRelatorio).to(RelatorioService)
+container.bind<IRemessaLiquidacaoService>(IRemessaLiquidacaoServiceTypes).to(RemessaLiquidacaoService)
+container.bind<IRelatorio>(IRelatorioTypes).to(RelatorioService)
+container.bind<IRemessaRepository>(IRemessaRepositoryTypes).to(RemessaRepository).inSingletonScope()
+container.bind<FaunaDb>(FaunaDbTypes).to(FaunaDb).inTransientScope()
 
-export default container
+export { container }

@@ -1,13 +1,13 @@
+import * as TYPES from './config/DependencyInjection/dependecyInjectionConfig'
 import { Router } from 'express'
-import container from './config/DependencyInjection/dependencyInjectionResolver'
-import TYPES from './config/DependencyInjection/dependecyInjectionConfig'
+import { container } from './config/DependencyInjection/dependencyInjectionResolver'
 import RemessaLiquidacaoController from './controllers/remessaLiquidacaoController'
 import IRemessaLiquidacaoService from './services/interfaces/iRemessaLiquidacao'
 import IRelatorio from './services/interfaces/iRelatorio'
 import RelatorioController from './controllers/relatoriosController'
 
-const liquidacaoService = container.get<IRemessaLiquidacaoService>(TYPES.IRemessaLiquidacaoService)
-const relatorioService = container.get<IRelatorio>(TYPES.IRelatorio)
+const liquidacaoService = container.get<IRemessaLiquidacaoService>(TYPES.IRemessaLiquidacaoServiceTypes)
+const relatorioService = container.get<IRelatorio>(TYPES.IRelatorioTypes)
 
 const remessaController = new RemessaLiquidacaoController(liquidacaoService)
 const relatorioController = new RelatorioController(relatorioService)
