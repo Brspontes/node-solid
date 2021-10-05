@@ -9,6 +9,12 @@ import RemessaLiquidacaoOutput from '../models/outputs/remessaLiquidacaoOutput'
 type Reference = {
   ref: {
     id: string
+  },
+  data: {
+    _cnpj: string
+    _numeroControleParticipante: string,
+    _valorNominal: number,
+    _valorLiquidacao: number
   }
 }
 
@@ -27,7 +33,7 @@ export default class RemessaRepository implements IRemessaRepository {
       )
 
       if (reference?.ref?.id) {
-        return `Não foi possível localizar a remessa: ${idRemessa} `
+        return `Erro: Não foi possível localizar a remessa: ${idRemessa} `
       }
 
       await this.fauna.createConnection().query(
@@ -40,24 +46,31 @@ export default class RemessaRepository implements IRemessaRepository {
       )
       return `Remessa ${idRemessa} cancelada com sucesso`
     } catch (error) {
-      return 'Houve um erro ao cancelar a remessa'
+      return 'Erro: Houve um erro ao cancelar a remessa'
     }
   }
 
   ObterRemessaPorId = async (numeroControleParticipante: string): Promise<RemessaLiquidacaoOutput> => {
     try {
-      const remessa = await this.fauna.createConnection().query<RemessaLiquidacaoOutput>(
+      const remessaOutput: RemessaLiquidacaoOutput = new RemessaLiquidacaoOutput()
+      await this.fauna.createConnection().query<Reference>(
         q.Get(
           q.Match(
             q.Index('controle_participante'),
             numeroControleParticipante
           )
         )
-      )
-      return remessa
+      ).then(remessa => {
+        remessaOutput.cnpj = remessa.data._cnpj
+        remessaOutput.numeroControleParticipante = remessa.data._numeroControleParticipante
+        remessaOutput.valorLiquidacao = remessa.data._valorLiquidacao
+        remessaOutput.valorNominal = remessa.data._valorNominal
+      })
+
+      return remessaOutput
     } catch (error) {
       const remessa = new RemessaLiquidacaoOutput()
-      remessa._errors.push(`Não foi possível obter a remessa: ${error.message}`)
+      remessa.errors.push(`Não foi possível obter a remessa: ${error.message}`)
       return remessa
     }
   }

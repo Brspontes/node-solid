@@ -4,6 +4,7 @@ import RemessaLiquidacaoInput from '../models/inputs/remessaLiquidacaoInput'
 import RemessaLiquidacao from '../models/entities/remessaLiquidacao'
 import IRemessaLiquidacaoService from '../services/interfaces/iRemessaLiquidacao'
 import { statusCodeHelper } from '../helpers/statusCodeHelper'
+import RemessaLiquidacaoOutput from '../models/outputs/remessaLiquidacaoOutput'
 
 class RemessaLiquidacaoController {
   constructor (private readonly liquidacaoService: IRemessaLiquidacaoService) { }
@@ -26,6 +27,21 @@ class RemessaLiquidacaoController {
     const { id } = req.params
     const retorno = await this.liquidacaoService.CancelarRemessa(id)
 
+    if (retorno.search('Erro') > -1) {
+      return res.status(statusCodeHelper.BAD_REQUEST).send(retorno)
+    }
+
+    return res.status(statusCodeHelper.OK).send(retorno)
+  }
+
+  ObterRemessa = async (req: Request, res: Response): Promise<Response<RemessaLiquidacaoOutput>> => {
+    const { id } = req.params
+
+    if (id.length === 0) {
+      return res.status(statusCodeHelper.BAD_REQUEST).send('O id deve ser enviado')
+    }
+
+    const retorno = await this.liquidacaoService.ObterRemessaPorId(id)
     return res.status(statusCodeHelper.OK).send(retorno)
   }
 }

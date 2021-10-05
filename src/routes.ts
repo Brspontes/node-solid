@@ -16,6 +16,7 @@ const routes = Router()
 
 routes.post('/remessa/processar', remessaController.ProcessarRemessa)
 routes.delete('/remessa/cancelar/:id', remessaController.CancelarRemessa)
+routes.get('/remessa/obterporid/:id', remessaController.ObterRemessa)
 
 routes.get('/relatorio/estoque', relatorioController.GerarRelatorioEstoque)
 routes.get('/relatorio/movimentacao', relatorioController.GerarMovimentacaoEstoque)
