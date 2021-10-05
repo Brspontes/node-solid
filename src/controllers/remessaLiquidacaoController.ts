@@ -22,9 +22,9 @@ class RemessaLiquidacaoController {
     return res.status(statusCodeHelper.OK).json(retorno)
   }
 
-  CancelarRemessa = (req: Request, res: Response): Response => {
+  CancelarRemessa = async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params
-    const retorno = this.liquidacaoService.CancelarRemessa(id)
+    const retorno = await this.liquidacaoService.CancelarRemessa(id)
 
     return res.status(statusCodeHelper.OK).send(retorno)
   }

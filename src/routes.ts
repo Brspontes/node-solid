@@ -1,6 +1,6 @@
-import * as TYPES from './config/DependencyInjection/dependecyInjectionConfig'
+import * as TYPES from './config/dependencyInjection/dependecyInjectionConfig'
 import { Router } from 'express'
-import { container } from './config/DependencyInjection/dependencyInjectionResolver'
+import { container } from './config/dependencyInjection/dependencyInjectionResolver'
 import RemessaLiquidacaoController from './controllers/remessaLiquidacaoController'
 import IRemessaLiquidacaoService from './services/interfaces/iRemessaLiquidacao'
 import IRelatorio from './services/interfaces/iRelatorio'

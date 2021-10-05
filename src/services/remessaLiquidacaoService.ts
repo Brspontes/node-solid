@@ -3,8 +3,7 @@ import { inject, injectable } from 'inversify'
 import remessaLiquidacao from '../models/entities/remessaLiquidacao'
 import IRemessaLiquidacaoService from './interfaces/IRemessaLiquidacao'
 import IRemessaRepository from '../repository/interfaces/IRemessaRepository'
-import { IRemessaRepositoryTypes } from '../config/DependencyInjection/dependecyInjectionConfig'
-
+import { IRemessaRepositoryTypes } from '../config/dependencyInjection/dependecyInjectionConfig'
 @injectable()
 export default class RemessaLiquidacaoService implements IRemessaLiquidacaoService {
   private readonly _remessaRepository: IRemessaRepository
@@ -17,7 +16,7 @@ export default class RemessaLiquidacaoService implements IRemessaLiquidacaoServi
     return await this._remessaRepository.CriarRemessa(remessaLiquidacao)
   }
 
-  CancelarRemessa (idRemessa: string): string {
-    return `Remessa ${idRemessa} Cancelada Com Sucesso`
+  CancelarRemessa = async (idRemessa: string): Promise<string> => {
+    return this._remessaRepository.CancelarRemessa(idRemessa)
   }
 }

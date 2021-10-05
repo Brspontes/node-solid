@@ -5,7 +5,7 @@ import RemessaLiquidacaoService from '../../services/remessaLiquidacaoService'
 import IRelatorio from '../../services/interfaces/iRelatorio'
 import RelatorioService from '../../services/relatorioService'
 import IRemessaRepository from '../../repository/interfaces/IRemessaRepository'
-import RemessaRepository from '../../repository/RemessaRepository'
+import RemessaRepository from '../../repository/remessaRepository'
 import FaunaDb from '../db/fauna'
 
 const container = new Container()
