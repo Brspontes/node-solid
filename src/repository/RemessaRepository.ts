@@ -27,7 +27,7 @@ export default class RemessaRepository implements IRemessaRepository {
       )
 
       if (reference?.ref?.id) {
-        return `Bão foi possível localizar a remessa: ${idRemessa} `
+        return `Não foi possível localizar a remessa: ${idRemessa} `
       }
 
       await this.fauna.createConnection().query(
