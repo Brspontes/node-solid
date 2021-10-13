@@ -3,8 +3,8 @@ import { inject, injectable } from 'inversify'
 import { FaunaDbTypes } from '../config/dependencyInjection/dependecyInjectionConfig'
 import IRemessaRepository from './interfaces/IRemessaRepository'
 import FaunaDb from '../config/db/fauna'
-import RemessaLiquidacao from '../models/entities/remessaLiquidacao'
-import RemessaLiquidacaoOutput from '../models/outputs/remessaLiquidacaoOutput'
+import RemessaLiquidacao from '../domain/entities/remessaLiquidacao'
+import RemessaLiquidacaoOutput from '../domain/outputs/remessaLiquidacaoOutput'
 
 type Reference = {
   ref: {
@@ -32,7 +32,7 @@ export default class RemessaRepository implements IRemessaRepository {
         )
       )
 
-      if (reference?.ref?.id) {
+      if (!reference?.ref?.id) {
         return `Erro: Não foi possível localizar a remessa: ${idRemessa} `
       }
 

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import RelatorioEstoque from '../models/entities/relatorioEstoque'
-import RelatorioMovimentacaoEstoque from '../models/entities/relatorioMovimentacao'
+import RelatorioEstoque from '../domain/entities/relatorioEstoque'
+import RelatorioMovimentacaoEstoque from '../domain/entities/relatorioMovimentacao'
 import IRelatorio from '../services/interfaces/iRelatorio'
 
 class RelatorioController {

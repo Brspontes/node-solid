@@ -1,10 +1,10 @@
 import { CustomRequest } from '../helpers/customRequestHelper'
 import { Request, Response } from 'express'
-import RemessaLiquidacaoInput from '../models/inputs/remessaLiquidacaoInput'
-import RemessaLiquidacao from '../models/entities/remessaLiquidacao'
-import IRemessaLiquidacaoService from '../services/interfaces/iRemessaLiquidacao'
 import { statusCodeHelper } from '../helpers/statusCodeHelper'
-import RemessaLiquidacaoOutput from '../models/outputs/remessaLiquidacaoOutput'
+import RemessaLiquidacaoInput from '../domain/inputs/remessaLiquidacaoInput'
+import RemessaLiquidacao from '../domain/entities/remessaLiquidacao'
+import IRemessaLiquidacaoService from '../services/interfaces/iRemessaLiquidacao'
+import RemessaLiquidacaoOutput from '../domain/outputs/remessaLiquidacaoOutput'
 
 class RemessaLiquidacaoController {
   constructor (private readonly liquidacaoService: IRemessaLiquidacaoService) { }
@@ -27,7 +27,7 @@ class RemessaLiquidacaoController {
     const { id } = req.params
     const retorno = await this.liquidacaoService.CancelarRemessa(id)
 
-    if (retorno.search('Erro') > -1) {
+    if (retorno.search('Erro') > 0) {
       return res.status(statusCodeHelper.BAD_REQUEST).send(retorno)
     }
 

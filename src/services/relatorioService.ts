@@ -1,5 +1,5 @@
 import { injectable } from 'inversify'
-import relatorio from '../models/entities/base/relatorio'
+import relatorio from '../domain/entities/base/relatorio'
 import IRelatorio from './interfaces/iRelatorio'
 
 @injectable()
