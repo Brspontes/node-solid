@@ -54,7 +54,7 @@ export default class RemessaLiquidacao {
 
     if (!this._valorLiquidacao) { this._errors.push('Valor liquidação é obrigatório') }
 
-    if (this._valorLiquidacao > this._valorResidual) { this._errors.push('Valor liquidação não pode ser maior que o valor nominal') }
+    if (this._valorLiquidacao > this._valorNominal) { this._errors.push('Valor liquidação não pode ser maior que o valor nominal') }
   }
 
   public AtualizarValorResidual (valorNominal: number, valorLiquidacao: number): void {

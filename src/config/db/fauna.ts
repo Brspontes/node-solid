@@ -12,6 +12,10 @@ class FaunaDb {
 
     return this.fauna
   }
+
+  closeConnection = (): void => {
+    this.fauna.close()
+  }
 }
 
 export default FaunaDb

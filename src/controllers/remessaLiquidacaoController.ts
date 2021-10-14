@@ -18,7 +18,7 @@ class RemessaLiquidacaoController {
       remessaInput.valorNominal,
       remessaInput.valorLiquidacao)
 
-    if (remessaLiquidacao.errors.length > 0) { res.status(statusCodeHelper.BAD_REQUEST).json(remessaLiquidacao.errors) }
+    if (remessaLiquidacao.errors.length > 0) { return res.status(statusCodeHelper.BAD_REQUEST).json(remessaLiquidacao.errors) }
 
     const retorno = await this.liquidacaoService.EnviarParaProcessamento(remessaLiquidacao)
     return res.status(statusCodeHelper.OK).json(retorno)
