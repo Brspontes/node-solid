@@ -15,6 +15,7 @@ const relatorioController = new RelatorioController(relatorioService)
 const routes = Router()
 
 routes.post('/remessa/processar', remessaController.ProcessarRemessa)
+routes.post('/remessa/atualizar', remessaController.AtualizarValoresRemessa)
 routes.delete('/remessa/cancelar/:id', remessaController.CancelarRemessa)
 routes.get('/remessa/obterporid/:id', remessaController.ObterRemessa)
 

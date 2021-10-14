@@ -13,6 +13,26 @@ export default class RemessaLiquidacaoService implements IRemessaLiquidacaoServi
     this._remessaRepository = remessaRepository
   }
 
+  AtualizarValorResidual = async (controleParticipante: string, valorNominal: number, valorLiquidacao: number): Promise<remessaLiquidacaoOutput> => {
+    let remessa = new remessaLiquidacaoOutput()
+
+    if (valorLiquidacao > valorNominal) {
+      remessa.errors.push('Valor liquidação não pode ser maior que o valor nominal')
+      return remessa
+    }
+
+    remessa = await this._remessaRepository.ObterRemessaPorId(controleParticipante)
+    if (!remessa) {
+      remessa.errors.push('Valor liquidação não pode ser maior que o valor nominal')
+      return remessa
+    }
+    const atualizarRemessa = new remessaLiquidacao(remessa.numeroControleParticipante, remessa.cnpj, remessa.valorNominal, remessa.valorLiquidacao)
+    atualizarRemessa.AtualizarValorResidual(valorNominal, valorLiquidacao)
+
+    const retorno = this._remessaRepository.AtualizarValorResidual(atualizarRemessa)
+    return retorno
+  }
+
   ObterRemessaPorId = async (controleParticipante: string): Promise<remessaLiquidacaoOutput> => {
     return await this._remessaRepository.ObterRemessaPorId(controleParticipante)
   }

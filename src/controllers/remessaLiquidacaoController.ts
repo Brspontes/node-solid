@@ -5,6 +5,7 @@ import RemessaLiquidacaoInput from '../domain/inputs/remessaLiquidacaoInput'
 import RemessaLiquidacao from '../domain/entities/remessaLiquidacao'
 import IRemessaLiquidacaoService from '../services/interfaces/iRemessaLiquidacao'
 import RemessaLiquidacaoOutput from '../domain/outputs/remessaLiquidacaoOutput'
+import RemessaLiquidacaoAtualizarInput from '../domain/inputs/remessaLiquidacaoAtualizarInput'
 
 class RemessaLiquidacaoController {
   constructor (private readonly liquidacaoService: IRemessaLiquidacaoService) { }
@@ -42,6 +43,16 @@ class RemessaLiquidacaoController {
     }
 
     const retorno = await this.liquidacaoService.ObterRemessaPorId(id)
+    return res.status(statusCodeHelper.OK).send(retorno)
+  }
+
+  AtualizarValoresRemessa = async (req: CustomRequest<RemessaLiquidacaoAtualizarInput>, res: Response): Promise<Response<RemessaLiquidacaoOutput>> => {
+    const remessa = req.body
+
+    const retorno = await this.liquidacaoService.AtualizarValorResidual(remessa.numeroControleParticipante, remessa.valorNominal, remessa.valorLiquidacao)
+
+    if (retorno.errors.length > 0) return res.status(statusCodeHelper.BAD_REQUEST).send(retorno)
+
     return res.status(statusCodeHelper.OK).send(retorno)
   }
 }

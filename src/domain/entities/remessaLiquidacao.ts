@@ -4,6 +4,7 @@ export default class RemessaLiquidacao {
   private _valorNominal: number
   private _valorLiquidacao: number
   private _errors: string[] = []
+  private _valorResidual: number
 
   constructor (
     numeroControleParticipante: string,
@@ -14,6 +15,8 @@ export default class RemessaLiquidacao {
     this._numeroControleParticipante = numeroControleParticipante
     this._valorNominal = valorNominal
     this._valorLiquidacao = valorLiquidacao
+
+    this._valorResidual = valorNominal - valorLiquidacao
 
     this.ValidaRemessa()
   }
@@ -34,6 +37,10 @@ export default class RemessaLiquidacao {
     return this._valorLiquidacao
   }
 
+  public get valorResidual (): number {
+    return this.valorResidual
+  }
+
   public get errors (): string[] {
     return this._errors
   }
@@ -46,5 +53,14 @@ export default class RemessaLiquidacao {
     if (!this._valorNominal) { this._errors.push('Valor nominal é obrigatório') }
 
     if (!this._valorLiquidacao) { this._errors.push('Valor liquidação é obrigatório') }
+
+    if (this._valorLiquidacao > this._valorResidual) { this._errors.push('Valor liquidação não pode ser maior que o valor nominal') }
+  }
+
+  public AtualizarValorResidual (valorNominal: number, valorLiquidacao: number): void {
+    this._valorNominal = valorNominal
+    this._valorLiquidacao = valorLiquidacao
+
+    this._valorResidual = valorNominal - valorLiquidacao
   }
 }

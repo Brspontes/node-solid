@@ -14,13 +14,15 @@ type Reference = {
     _cnpj: string
     _numeroControleParticipante: string,
     _valorNominal: number,
-    _valorLiquidacao: number
+    _valorLiquidacao: number,
+    _valorResidual: number
   }
 }
 
 @injectable()
 export default class RemessaRepository implements IRemessaRepository {
   constructor (@inject(FaunaDbTypes) private readonly fauna: FaunaDb) { }
+
   CancelarRemessa = async (idRemessa: string): Promise<string> => {
     try {
       const reference = await this.fauna.createConnection().query<Reference>(
@@ -50,6 +52,47 @@ export default class RemessaRepository implements IRemessaRepository {
     }
   }
 
+  AtualizarValorResidual= async (remessa: RemessaLiquidacao): Promise<RemessaLiquidacaoOutput> => {
+    const remessaRetorno = new RemessaLiquidacaoOutput()
+    try {
+      // const reference = await this.fauna.createConnection().query<Reference>(
+      //   q.Get(
+      //     q.Match(
+      //       q.Index('controle_participante'),
+      //       remessa.numeroControleParticipante
+      //     )
+      //   )
+      // )
+
+      await this.fauna.createConnection().query(
+        q.Update(
+          q.Ref(
+            q.Collection('remessa'),
+            q.Match(
+              q.Index('controle_participante'),
+              remessa.numeroControleParticipante
+            )
+          ),
+          {
+            data: {
+              remessa
+            }
+          }
+        )
+      ).then(() => {
+        remessaRetorno.numeroControleParticipante = remessa.numeroControleParticipante
+        remessaRetorno.valorLiquidacao = remessa.valorPresente
+        remessaRetorno.cnpj = remessa.cnpj
+        remessaRetorno.valorNominal = remessa.valorNominal
+        remessaRetorno.valorResidual = remessa.valorResidual
+      })
+      return remessaRetorno
+    } catch (error) {
+      remessaRetorno.errors.push(`Houve um erro ao atualizar o valor: ${error.message}`)
+      return remessaRetorno
+    }
+  }
+
   ObterRemessaPorId = async (numeroControleParticipante: string): Promise<RemessaLiquidacaoOutput> => {
     try {
       const remessaOutput: RemessaLiquidacaoOutput = new RemessaLiquidacaoOutput()
@@ -65,6 +108,7 @@ export default class RemessaRepository implements IRemessaRepository {
         remessaOutput.numeroControleParticipante = remessa.data._numeroControleParticipante
         remessaOutput.valorLiquidacao = remessa.data._valorLiquidacao
         remessaOutput.valorNominal = remessa.data._valorNominal
+        remessaOutput.valorResidual = remessa.data?._valorResidual
       })
 
       return remessaOutput

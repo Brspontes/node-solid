@@ -5,4 +5,5 @@ export default interface IRemessaRepository {
   CriarRemessa (remessa: RemessaLiquidacao): Promise<string>
   CancelarRemessa (idRemessa: string): Promise<string>
   ObterRemessaPorId (numeroControleParticipante: string): Promise<RemessaLiquidacaoOutput>
+  AtualizarValorResidual (remessaLiquidacao: RemessaLiquidacao): Promise<RemessaLiquidacaoOutput>
 }

@@ -19,6 +19,8 @@ module.exports = {
     'no-useless-constructor': 0,
     '@typescript-eslint/no-useless-constructor': 0,
     'no-empty-function': 0,
-    '@typescript-eslint/no-empty-function': 0
+    '@typescript-eslint/no-empty-function': 0,
+    'new-cap': 0,
+    '@typescript-eslint/new-cap': 0
   }
 }
