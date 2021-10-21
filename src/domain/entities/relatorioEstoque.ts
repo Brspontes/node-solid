@@ -1,8 +1,8 @@
-import Relatorio from './base/relatorio'
+import Relatorio from './base/entityBase'
 
 export default class RelatorioEstoque extends Relatorio {
-  constructor (id: string, descricao: string) {
-    super(id)
+  constructor (descricao: string) {
+    super()
     this._descricao = descricao
   }
 
