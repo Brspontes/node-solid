@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import RelatorioEstoque from '../domain/entities/relatorioEstoque'
 import RelatorioMovimentacaoEstoque from '../domain/entities/relatorioMovimentacao'
-import IRelatorio from '../services/interfaces/iRelatorio'
+import IRelatorio from '../core/interfaces/services/iRelatorio'
 
 class RelatorioController {
   constructor (private readonly relatorioService: IRelatorio) { }

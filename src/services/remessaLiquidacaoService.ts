@@ -1,9 +1,9 @@
 import 'reflect-metadata'
 import { inject, injectable } from 'inversify'
 import remessaLiquidacao from '../domain/entities/remessaLiquidacao'
-import IRemessaLiquidacaoService from './interfaces/IRemessaLiquidacao'
-import IRemessaRepository from '../repository/interfaces/IRemessaRepository'
-import { IRemessaRepositoryTypes } from '../config/dependencyInjection/dependecyInjectionConfig'
+import IRemessaLiquidacaoService from '../core/interfaces/services/IRemessaLiquidacao'
+import IRemessaRepository from '../core/interfaces/repository/IRemessaRepository'
+import { IRemessaRepositoryTypes } from '../core/config/dependencyInjection/dependecyInjectionConfig'
 import remessaLiquidacaoOutput from '../domain/outputs/remessaLiquidacaoOutput'
 @injectable()
 export default class RemessaLiquidacaoService implements IRemessaLiquidacaoService {

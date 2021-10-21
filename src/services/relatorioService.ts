@@ -1,6 +1,6 @@
 import { injectable } from 'inversify'
 import relatorio from '../domain/entities/base/relatorio'
-import IRelatorio from './interfaces/iRelatorio'
+import IRelatorio from '../core/interfaces/services/iRelatorio'
 
 @injectable()
 export default class RelatorioService implements IRelatorio {

@@ -1,11 +1,11 @@
 import { Container } from 'inversify'
 import { IRelatorioTypes, IRemessaLiquidacaoServiceTypes, IRemessaRepositoryTypes, FaunaDbTypes } from './dependecyInjectionConfig'
-import IRemessaLiquidacaoService from '../../services/interfaces/iRemessaLiquidacao'
-import RemessaLiquidacaoService from '../../services/remessaLiquidacaoService'
-import IRelatorio from '../../services/interfaces/iRelatorio'
-import RelatorioService from '../../services/relatorioService'
-import IRemessaRepository from '../../repository/interfaces/IRemessaRepository'
-import RemessaRepository from '../../repository/remessaRepository'
+import IRemessaLiquidacaoService from '../../interfaces/services/iRemessaLiquidacao'
+import RemessaLiquidacaoService from '../../../services/remessaLiquidacaoService'
+import IRelatorio from '../../interfaces/services/iRelatorio'
+import RelatorioService from '../../../services/relatorioService'
+import IRemessaRepository from '../../interfaces/repository/IRemessaRepository'
+import RemessaRepository from '../../../repository/remessaRepository'
 import FaunaDb from '../db/fauna'
 
 const container = new Container()

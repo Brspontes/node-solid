@@ -1,5 +1,5 @@
-import RemessaLiquidacao from '../../domain/entities/remessaLiquidacao'
-import RemessaLiquidacaoOutput from '../../domain/outputs/remessaLiquidacaoOutput'
+import RemessaLiquidacao from '../../../domain/entities/remessaLiquidacao'
+import RemessaLiquidacaoOutput from '../../../domain/outputs/remessaLiquidacaoOutput'
 
 export default interface IRemessaRepository {
   CriarRemessa (remessa: RemessaLiquidacao): Promise<string>

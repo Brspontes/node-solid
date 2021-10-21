@@ -1,8 +1,8 @@
 import { query as q } from 'faunadb'
 import { inject, injectable } from 'inversify'
-import { FaunaDbTypes } from '../config/dependencyInjection/dependecyInjectionConfig'
-import IRemessaRepository from './interfaces/IRemessaRepository'
-import FaunaDb from '../config/db/fauna'
+import { FaunaDbTypes } from '../core/config/dependencyInjection/dependecyInjectionConfig'
+import IRemessaRepository from '../core/interfaces/repository/IRemessaRepository'
+import FaunaDb from '../core/config/db/fauna'
 import RemessaLiquidacao from '../domain/entities/remessaLiquidacao'
 import RemessaLiquidacaoOutput from '../domain/outputs/remessaLiquidacaoOutput'
 

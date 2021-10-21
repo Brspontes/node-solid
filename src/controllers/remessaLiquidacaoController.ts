@@ -1,9 +1,9 @@
-import { CustomRequest } from '../helpers/customRequestHelper'
+import { CustomRequest } from '../core/helpers/customRequestHelper'
 import { Request, Response } from 'express'
-import { statusCodeHelper } from '../helpers/statusCodeHelper'
+import { statusCodeHelper } from '../core/helpers/statusCodeHelper'
 import RemessaLiquidacaoInput from '../domain/inputs/remessaLiquidacaoInput'
 import RemessaLiquidacao from '../domain/entities/remessaLiquidacao'
-import IRemessaLiquidacaoService from '../services/interfaces/iRemessaLiquidacao'
+import IRemessaLiquidacaoService from '../core/interfaces/services/iRemessaLiquidacao'
 import RemessaLiquidacaoOutput from '../domain/outputs/remessaLiquidacaoOutput'
 import RemessaLiquidacaoAtualizarInput from '../domain/inputs/remessaLiquidacaoAtualizarInput'
 
